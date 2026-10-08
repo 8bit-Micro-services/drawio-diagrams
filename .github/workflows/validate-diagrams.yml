@@ -1,0 +1,34 @@
+name: Validate diagrams
+
+on:
+  push:
+    paths: ['**/*.drawio', '**/*.xml']
+  pull_request:
+    paths: ['**/*.drawio', '**/*.xml']
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check diagram files are well-formed XML
+        run: |
+          python3 - <<'PY'
+          import glob, sys
+          import xml.etree.ElementTree as ET
+          bad = 0
+          files = glob.glob('architecture/**/*.drawio', recursive=True) + \
+                  glob.glob('flowcharts/**/*.drawio', recursive=True) + \
+                  glob.glob('network/**/*.drawio', recursive=True)
+          for f in files:
+              try:
+                  ET.parse(f)
+              except ET.ParseError as e:
+                  print(f"::error file={f}::{e}")
+                  bad += 1
+          print(f"Checked {len(files)} file(s)")
+          sys.exit(1 if bad else 0)
+          PY

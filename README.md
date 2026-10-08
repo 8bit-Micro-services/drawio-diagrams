@@ -1,5 +1,17 @@
 # diagrams.net Diagrams
 
+## Save diagrams to this repository from draw.io
+
+1. Open **https://app.diagrams.net**
+2. Choose **GitHub** as the save location and authorize draw.io
+3. Select this repository and a branch, then pick a folder (see below) and save
+
+Every save is committed to GitHub. See [SETUP.md](SETUP.md) for the step-by-step guide and [CONTRIBUTING.md](CONTRIBUTING.md) for conventions.
+
+Suggested folders: `architecture/`, `flowcharts/`, `network/`.
+
+## Example diagrams
+
 Click on a title to open a diagram or go to File, Open from, URL and enter an URL of the form
 https://raw.githubusercontent.com/jgraph/drawio-diagrams/dev/diagrams/schema.xml
 
